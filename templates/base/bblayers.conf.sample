@@ -50,9 +50,10 @@ AGL_CORE_DEPENDENCY_LAYERS = " \
 # temporary ... to avoid build breakage. To move to upper layers.
 AGL_TEMP_GFX_LAYERS = " \
   ${METADIR}/meta-agl/meta-agl-profile-graphical \
-  ${METADIR}/meta-agl/meta-agl-profile-demo \
+  ${METADIR}/meta-agl/meta-agl-profile-graphical-qt5 \
   "
-
+#  ${METADIR}/meta-agl/meta-agl-profile-demo \
+#
 
 ####################
 # Combine the layers
