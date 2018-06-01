@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1f1a56bb2dadf5f2be8eb342acf4ed79"
 
 SRCREV = "ede33c1c898eeaf673dd2c275e92763a5aabd066"
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=http \
-	file://0001-simple-id-agent-initial-commit.patch;patch=1 \
-	file://0002-ivi-controller-load-id-agent-module.patch;patch=1 \
+        file://0001-Added-ivi-id-agent-to-CMake.patch \
+        file://0002-ivi-id-agent-added-ivi-id-agent.patch \
+        file://0003-ivi-controller-load-id-agent-module.patch \
         file://0003-ivi-controller-add-resize-setting-suit-to-surface-si.patch \
         file://0001-Resolve-weston-crush-when-repeat-touching-very-quick.patch \
 "
