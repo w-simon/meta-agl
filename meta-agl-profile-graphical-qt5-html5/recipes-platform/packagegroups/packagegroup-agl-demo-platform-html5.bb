@@ -12,7 +12,7 @@ PACKAGES = "\
 ALLOW_EMPTY_${PN} = "1"
 
 RDEPENDS_${PN} += "\
-    packagegroup-agl-image-ivi \
+    packagegroup-agl-profile-graphical-qt5 \
     "
 
 # add packages for demo platform (include demo apps) here
