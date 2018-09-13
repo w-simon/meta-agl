@@ -1,0 +1,5 @@
+#!/bin/sh
+
+detect-board.sh
+source /etc/platform-hw-info
+make -f "Makefile.${BOARD_ID}"

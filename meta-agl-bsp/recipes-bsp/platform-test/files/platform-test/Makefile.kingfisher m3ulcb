@@ -1,0 +1,41 @@
+#!/usr/bin/make
+
+ETHERNET_DEV=eth0
+WIFI_CONNMANCTL_TECHNOLOGY=wifi
+CAN_DEV=can0 can1
+GPS_DEV=/dev/ttySC2
+HDMI_DEV=HDMI-A-1 HDMI-A-2 HDMI-LVDS-1
+IIO_DEV=/sys/bus/iio/devices/iio:device0/*_raw
+USB_BUS_NB=2
+
+test-all: test
+
+test: test-bt_hci test-can test-ethernet test-gps test-hdmi test-iio test-radio test-usb test-wifi
+
+test-bt_hci: tests/test-BT_HCI
+	tests/test-BT_HCI
+
+test-can: tests/test-CAN
+	tests/test-CAN $(CAN_DEV)
+
+test-ethernet: tests/test-Ethernet
+	tests/test-Ethernet $(ETHERNET_DEV)
+
+test-gps: tests/test-GPS
+	tests/test-GPS $(GPS_DEV)
+
+test-hdmi: tests/test-HDMI
+	tests/test-HDMI $(HDMI_DEV)
+
+test-iio: tests/test-IIO
+	tests/test-GPS $(IIO_DEV)
+
+test-radio: tests/test-Radio
+	tests/test-Radio
+
+test-usb: tests/test-USB
+	tests/test-USB $(USB_BUS_NB)
+
+test-wifi: tests/test-Wifi
+	tests/test-Wifi $(WIFI_CONNMANCTL_TECHNOLOGY)
+

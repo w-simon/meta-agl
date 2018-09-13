@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+. ${SCRIPT_DIR}/common.sh
+
+TEST_MSG="HCI BT device detection"
+
+HCI_DEV=$(hcitool dev | sed '1d')
+
+[ "${HCI_DEV}" ] && pass ${TEST_MSG} || fail ${TEST_MSG}

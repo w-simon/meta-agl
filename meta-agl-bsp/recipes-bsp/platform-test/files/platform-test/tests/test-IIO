@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+. ${SCRIPT_DIR}/common.sh
+
+TEST_MSG="IIO Devices Gyro/Accell detection"
+
+IIO_DUMP_FILE=/tmp/gps-dump-test.log
+cat $* &> ${IIO_DUMP_FILE}
+
+if [ $(ls -l ${IIO_DUMP_FILE} | awk '{print $5}') -gt 0 ]
+then
+	pass ${TEST_MSG}
+else
+	fail ${TEST_MSG}
+fi

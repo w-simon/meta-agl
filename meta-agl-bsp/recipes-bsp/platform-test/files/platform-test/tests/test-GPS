@@ -1,0 +1,41 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+. ${SCRIPT_DIR}/common.sh
+
+TEST_DEV_PRESENCE_MSG="GPS device detection"
+TEST_DUMP_DEVICE_MSG="GPS dump test"
+
+test_dev_presence() {
+	ls ${1} &> /dev/null
+	if [ $? -eq 0 ]
+	then
+		pass ${TEST_DEV_PRESENCE_MSG}
+	else
+		fail ${TEST_DEV_PRESENCE_MSG}
+	fi
+}
+
+test_dump_device() {
+	GPS_DUMP_FILE=/tmp/gps-dump-test.log
+	cat ${1} &> ${GPS_DUMP_FILE} &
+	DUMP_PID=$!
+	sleep 1
+	kill ${DUMP_PID}
+	if [ $(ls -l ${GPS_DUMP_FILE} | awk '{print $5}') -gt 0 ]
+	then
+		pass ${TEST_DUMP_DEVICE_MSG}
+	else
+		fail ${TEST_DUMP_DEVICE_MSG}
+	fi
+}
+
+RESULT=$(test_dev_presence $1)
+if [ "$(echo $RESULT | cut -d':' -f1)" = "PASS" ]
+then
+	RESULT="${RESULT}\n$(test_dump_device $1)"
+else
+	RESULT="${RESULT}\n$(skip ${TEST_DUMP_DEVICE_MSG})"
+fi
+
+echo -e "$RESULT"

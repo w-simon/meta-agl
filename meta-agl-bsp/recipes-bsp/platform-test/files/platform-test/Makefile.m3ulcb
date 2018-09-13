@@ -1,0 +1,19 @@
+#!/usr/bin/make
+
+ETHERNET_DEV=eth0
+HDMI_DEV=HDMI-A-1
+USB_BUS_NB=2
+
+test: test-ethernet test-hdmi test-usb
+
+test-all: test
+
+test-ethernet: tests/test-Ethernet
+	tests/test-Ethernet $(ETHERNET_DEV)
+
+test-hdmi: tests/test-HDMI
+	tests/test-HDMI $(HDMI_DEV)
+
+test-usb: tests/test-USB
+	tests/test-USB $(USB_BUS_NB)
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+. ${SCRIPT_DIR}/common.sh
+
+TEST_MSG="HDMI devices detection card: "
+
+for dev in $*
+do
+	RET=$(cat /sys/class/drm/card*-${dev}/status 2> /dev/null)
+	if [ "${RET}" = "connected" ] || [ "${RET}" = "disconnected" ]
+	then
+		pass ${TEST_MSG} $dev
+	else
+		fail ${TEST_MSG} $dev
+	fi
+done

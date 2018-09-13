@@ -36,6 +36,7 @@ RDEPENDS_${PN} = "\
     busybox \
     rng-tools \
     run-agl-postinsts \
+    platform-test \
     ${@bb.utils.contains("DISTRO_FEATURES", "sysvinit", "${SYSVINIT_SCRIPTS}", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "keyboard", "${VIRTUAL-RUNTIME_keymaps}", "", d)} \
     netbase \

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+. ${SCRIPT_DIR}/common.sh
+
+TEST_MSG="USB bus detection: "
+
+for dev in $(seq 1 $1)
+do
+	RET=$(lsusb -s ${dev}:)
+	if [ "${RET}" ]
+	then
+		pass ${TEST_MSG} $dev
+	else
+		fail ${TEST_MSG} $dev
+	fi
+done
