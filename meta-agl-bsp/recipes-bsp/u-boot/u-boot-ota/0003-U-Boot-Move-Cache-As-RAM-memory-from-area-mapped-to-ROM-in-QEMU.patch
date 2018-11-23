@@ -1,0 +1,41 @@
+From patchwork Fri Nov 10 17:51:02 2017
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [U-Boot] Move Cache-As-RAM memory from area mapped to ROM in QEMU
+X-Patchwork-Submitter: Anton Gerasimov <anton@advancedtelematic.com>
+X-Patchwork-Id: 836810
+X-Patchwork-Delegate: bmeng.cn@gmail.com
+Message-Id: <20171110175102.21746-1-anton@advancedtelematic.com>
+To: u-boot@lists.denx.de,
+	bmeng.cn@gmail.com
+Date: Fri, 10 Nov 2017 18:51:02 +0100
+From: Anton Gerasimov <anton@advancedtelematic.com>
+List-Id: U-Boot discussion <u-boot.lists.denx.de>
+
+ROM has been made read-only in qemu recently (namely commit
+208fa0e43645edd0b0d8f838857dfc79daff40a8), so this patch restores
+compatibility between u-boot and qemu. It is still broken for me
+unless I set CONFIG_SMP=n and disable lapic (i.e. revert patch
+aaaa55751ab1e5a5cfa0962d604593a7e6f33ff6 in u-boot), but these are
+separate issues
+
+Signed-off-by: Anton Gerasimov <anton@advancedtelematic.com>
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+ arch/x86/cpu/qemu/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/cpu/qemu/Kconfig b/arch/x86/cpu/qemu/Kconfig
+index 6808c9a6b9..f4b9922a34 100644
+--- a/arch/x86/cpu/qemu/Kconfig
++++ b/arch/x86/cpu/qemu/Kconfig
+@@ -11,7 +11,7 @@ if QEMU
+
+ config SYS_CAR_ADDR
+ 	hex
+-	default 0xd0000
++	default 0x10000
+
+ config SYS_CAR_SIZE
+ 	hex
