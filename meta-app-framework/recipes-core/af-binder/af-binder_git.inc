@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/app-framework-binder;protocol=https;branch=${AGL_BRANCH}"
 
-SRCREV = "1bce83316a1896cf5522d06b1fd6960d74511446"
+SRCREV = "8b58a16a65f618fa0ca4f7707badc55649bc7f12"
 PV = "${AGL_BRANCH}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
