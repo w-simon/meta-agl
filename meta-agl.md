@@ -11,24 +11,6 @@ You use this layer as the minimal core on which to build AGL profiles.
   as security, which are part of the
   [`meta-agl-extra`](./meta-agl-extra.html) layer.
 
-## Layer Dependencies
-
-* poky
-  > URI: git://git.yoctoproject.org/poky
-  > branch         : rocko
-
-* meta-openembedded
-  > URI: git://git.openembedded.org/meta-openembedded
-  > layer          : meta-openembedded
-  > branch         : rocko
-
-Specifically out of meta-openembedded these sub-layers are used:
-
-* meta-openembedded/meta-oe
-* meta-openembedded/meta-multimedia
-* meta-openembedded/meta-networking
-* meta-openembedded/meta-python
-
 ## Sub-Layers
 
 The `meta-agl` layer itself contains many sub-layers and files.
@@ -62,8 +44,8 @@ in `meta-agl`:
 
 * `docs`: Contains files that support AGL documentation.
 * `meta-agl`: Contains layer configuration for the `meta-agl` layer.
-* `meta-agl-bsp`: Contains recipes and required packages to boot an AGL
-  distribution on targeted hardware and emulation (i.e. QEMU).
+* `meta-agl-bsp`: Contains adaptations for recipes and required packages
+  to boot an AGL distribution on targeted hardware and emulation (i.e. QEMU).
 * `meta-agl-distro`: Contains distro configuration and supporting scripts.
 * `meta-agl-profile-cluster`: The middleware for the AGL cluster profile.
   The set of packages required for AGL Cluster Distribution.
@@ -94,7 +76,9 @@ in `meta-agl`:
 
 ## Packagegroups
 
-AGL package group design:
+This section describes the AGL
+[packagegroup](https://yoctoproject.org/docs/2.4.4/dev-manual/dev-manual.html#usingpoky-extend-customimage-customtasks)
+design:
 
 * packagegroup-agl-image-minimal
 
@@ -108,11 +92,11 @@ AGL package group design:
         packagegroup-agl-core-security.bb
         packagegroup-agl-core-speech-services.bb
 
-The previous list of Packagegroups are used to create the `agl-image-minimal` image,
-which is a small image just capable of allowing a device to boot.
+  The previous list of Packagegroups are used to create the `agl-image-minimal` image,
+  which is a small image just capable of allowing a device to boot.
 
-Subsystem should maintain packagegroup-agl-core-[subsystem].bb which should
-hold sufficient packages to build `agl-image-minimal`.
+  Subsystem should maintain packagegroup-agl-core-[subsystem].bb which should
+  hold sufficient packages to build `agl-image-minimal`.
 
 * packagegroup-agl-image-ivi
 
@@ -126,14 +110,15 @@ hold sufficient packages to build `agl-image-minimal`.
         packagegroup-agl-ivi-security.bb
         packagegroup-agl-ivi-speech-services.bb
 
-The previous list of Packagegroups are used to create the `agl-image-ivi`
-image, which is a baseline image (i.e. Service Layer and Operating System
-Layer defined in AGL Spec v1.0) for the AGL profiles.
+  The previous list of Packagegroups are used to create the `agl-image-ivi`
+  image, which is a baseline image (i.e. Service Layer and Operating System
+  Layer defined in AGL Spec v1.0) for the AGL profiles.
 
 * packagegroup-agl-test.bb
 
-Additional tools used in QA tests (for agl-image*-qa).
+  Additional tools used in QA tests (for agl-image*-qa).
 
+<!--
 * packagegroup-ivi-common*
 
         packagegroup-ivi-common-core-automotive.bb
@@ -148,6 +133,10 @@ Additional tools used in QA tests (for agl-image*-qa).
         packagegroup-ivi-common-core-speech-services.bb
         packagegroup-ivi-common-test.bb
 
+The previous Packagegroups pick up some packages from upstream
+locations such as
+[GENIVI Alliance](https://www.genivi.org/) and others.
 The `meta-ivi-common` layer produces no image.
 All the Packagegroups in this layer are aggregated to `packagegroup-ivi-common-core`,
 which is included by the images and the two recipes  `agl-image-ivi.bb` and `agl-demo-platform.bb`.
+-->
