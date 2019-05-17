@@ -1,0 +1,59 @@
+From 6e86c28fa61f8f80c9df6cad64af669fefc657c7 Mon Sep 17 00:00:00 2001
+From: Naoko Tanibata <tnaoko@jp.adit-jv.com>
+Date: Fri, 17 May 2019 21:37:21 +0900
+Subject: [PATCH 1/1] compositor-drm: get stride from drm_get_dma_fd_from_view
+
+Modify drm_get_dma_fd_from_view to get buffer stride.
+
+Signed-off-by: Veeresh Kadasani <external.vkadasani@jp.adit-jv.com>
+Signed-off-by: Naoko Tanibata <tnaoko@jp.adit-jv.com>
+---
+ libweston/compositor-drm.c | 4 +++-
+ libweston/compositor-drm.h | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/libweston/compositor-drm.c b/libweston/compositor-drm.c
+index 0692aa8..b82e903 100644
+--- a/libweston/compositor-drm.c
++++ b/libweston/compositor-drm.c
+@@ -2645,7 +2645,7 @@ drm_output_set_seat(struct weston_output *base,
+ 
+ static int
+ drm_get_dma_fd_from_view(struct weston_output *base,
+-			   struct weston_view *ev)
++			   struct weston_view *ev, int *buf_stride)
+ {
+ 	struct drm_backend *b = to_drm_backend(base->compositor);
+ 	struct weston_buffer *buffer = ev->surface->buffer_ref.buffer;
+@@ -2682,6 +2682,7 @@ drm_get_dma_fd_from_view(struct weston_output *base,
+ 			fprintf(stderr, "failed to get drm_handle\n");
+ 			return -1;
+ 		}
++		*buf_stride=gbm_dmabuf.stride;
+ 	}
+ 	else if(ev->surface->buffer_ref.buffer->legacy_buffer) {
+ 		bo = gbm_bo_import(b->gbm, GBM_BO_IMPORT_WL_BUFFER,
+@@ -2705,6 +2706,7 @@ drm_get_dma_fd_from_view(struct weston_output *base,
+ 			gbm_bo_destroy(bo);
+ 			return -1;
+ 		}
++		*buf_stride=current->stride;
+ 	}
+ 	else {
+ 		weston_log("Buffer is not supported\n");
+diff --git a/libweston/compositor-drm.h b/libweston/compositor-drm.h
+index 960b844..08122b2 100644
+--- a/libweston/compositor-drm.h
++++ b/libweston/compositor-drm.h
+@@ -84,7 +84,7 @@ struct weston_drm_output_api {
+          *  The dma fd is got from weston_view.
+ 	 *  Returns fd on success, -1 on failure.
+ 	 */
+-	int (*get_dma_fd_from_view)(struct weston_output *output, struct weston_view *view);
++	int (*get_dma_fd_from_view)(struct weston_output *output, struct weston_view *view, int *buf_stride);
+ };
+ 
+ static inline const struct weston_drm_output_api *
+-- 
+2.7.4
+
