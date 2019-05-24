@@ -32,3 +32,6 @@ KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/raspberrypi-panel.cfg"
 # Enable bt hci uart
 SRC_URI_append = " file://raspberrypi-hciuart.cfg"
 KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/raspberrypi-hciuart.cfg"
+
+SRC_URI_append = " file://raspberrypi-eth-builtin.cfg"
+KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/raspberrypi-eth-builtin.cfg"
