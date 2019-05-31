@@ -22,6 +22,7 @@ SRC_URI_append = "\
     file://0018-compositor-add-output-type-to-weston_output.patch \
     file://0019-compositor-drm-introduce-drm_get_dmafd_from_view.patch \
     file://use-XDG_RUNTIMESHARE_DIR.patch \
+    file://0020-compositor-drm-get-stride-from-drm_get_dma_fd_from_view.patch \
     "
 
 EXTRA_OECONF_append = " --enable-sys-uid"
