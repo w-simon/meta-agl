@@ -9,14 +9,14 @@ SECTION     = "graphics"
 LICENSE     = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 
-DEPENDS = "af-binder json-c wayland wayland-ivi-extension"
+DEPENDS = "af-binder json-c wayland wayland-ivi-extension wayland-native"
 
 inherit cmake aglwgt
 
-SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-windowmanager;protocol=https;branch=${AGL_BRANCH} \
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-windowmanager;protocol=https;branch=sandbox/zheng_wenlong/als2019 \
            file://weston-ready.conf \
 "
-SRCREV = "c850f10572d9252f7650065d5a305ca3739fea13"
+SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
