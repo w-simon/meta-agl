@@ -6,7 +6,6 @@ CMA_LWM = "16"
 CMA_HWM = "32"
 
 KERNEL_IMAGETYPE = "Image"
-KERNEL_DEVICETREE_append = " overlays/vc4-kms-v3d-overlay.dtb"
 
 MACHINE_FEATURES += "vc4graphics"
 
