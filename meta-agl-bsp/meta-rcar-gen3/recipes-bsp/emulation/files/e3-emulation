@@ -13,16 +13,10 @@ yl='\e[0;33m'
 bl='\e[0;34m'
 nc='\e[0m' # no color
 
-HW_DATA_PATH=/etc/platform-info/hardware
-BUILD_DATA_PATH=/etc/platform-info/build
-
-[[ ! -f $HW_DATA_PATH ]] && echo -ne "\n$yl Warning: Could not find harware information: $nc$HW_DATA_PATH$yl is missing.$nc\n"
-[[ ! -f $BUILD_DATA_PATH ]] && echo -ne "\n$yl Warning: Could not find build information: $nc$BUILD_DATA_PATH$yl is missing.$nc\n"
-source $HW_DATA_PATH &> /dev/null
-source $BUILD_DATA_PATH &> /dev/null
-
+#Set default option for m3ulcb
+DIST_MACHINE="m3ulcb"
 CPU_NB_ONLINE_CORE=$(cat /proc/cpuinfo | grep -i "^processor" | wc -l) && [[ ! $CPU_NB_ONLINE_CORE ]] && CPU_NB_ONLINE_CORE="0"
-CPU_MAX_CORE=$HW_CPU_COUNT && [[ ! $CPU_MAX_CORE ]] && CPU_MAX_CORE="0"
+CPU_MAX_CORE=6
 
 error()
 {
