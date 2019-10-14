@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/libafb-helpers;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "547374849a76225b1a6a0dd8bb84ae27a601f19d"
+SRCREV = "019054dc28dff58b74f6c28be9bb13b3e8460b94"
 
 PV = "${AGLVERSION}"
 S  = "${WORKDIR}/git"
