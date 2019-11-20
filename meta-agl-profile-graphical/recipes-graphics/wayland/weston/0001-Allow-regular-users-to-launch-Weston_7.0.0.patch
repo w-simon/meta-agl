@@ -1,0 +1,59 @@
+From 7d55a9cd37b117859c4053819f84317bd37a5965 Mon Sep 17 00:00:00 2001
+From: Kenji Hosokawa <khosokawa@jp.adit-jv.com>
+Date: Tue, 12 Nov 2019 14:47:57 +0900
+Subject: [PATCH] Allow regular users to launch Weston
+
+Signed-off-by: Kenji Hosokawa <khosokawa@jp.adit-jv.com>
+---
+ libweston/launcher-direct.c | 2 ++
+ meson.build                 | 4 ++++
+ meson_options.txt           | 6 ++++++
+ 3 files changed, 12 insertions(+)
+
+diff --git a/libweston/launcher-direct.c b/libweston/launcher-direct.c
+index 0a27a92..dccabf3 100644
+--- a/libweston/launcher-direct.c
++++ b/libweston/launcher-direct.c
+@@ -291,8 +291,10 @@ launcher_direct_connect(struct weston_launcher **out, struct weston_compositor *
+ {
+ 	struct launcher_direct *launcher;
+ 
++#ifndef ENABLE_SYS_UID
+ 	if (geteuid() != 0)
+ 		return -EINVAL;
++#endif
+ 
+ 	launcher = zalloc(sizeof(*launcher));
+ 	if (launcher == NULL)
+diff --git a/meson.build b/meson.build
+index 42a4f48..cbaf271 100644
+--- a/meson.build
++++ b/meson.build
+@@ -131,6 +131,10 @@ if dep_xkbcommon.version().version_compare('>= 0.5.0')
+ 	config_h.set('HAVE_XKBCOMMON_COMPOSE', '1')
+ endif
+ 
++if get_option('sys-uid')
++	config_h.set('ENABLE_SYS_UID', '1')
++endif
++
+ dep_wayland_server = dependency('wayland-server', version: '>= 1.12.0')
+ dep_wayland_client = dependency('wayland-client', version: '>= 1.12.0')
+ dep_pixman = dependency('pixman-1', version: '>= 0.25.2')
+diff --git a/meson_options.txt b/meson_options.txt
+index 2682918..cd3bd44 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -223,3 +223,9 @@ option(
+ 	value: false,
+ 	description: 'Generate documentation'
+ )
++option(
++	'sys-uid',
++	type: 'boolean',
++	value: false,
++	description: 'Allow regular users to launch Weston'
++)
+-- 
+2.7.4
+

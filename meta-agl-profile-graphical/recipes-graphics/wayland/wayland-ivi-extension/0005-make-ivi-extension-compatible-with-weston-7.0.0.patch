@@ -1,0 +1,54 @@
+From fd0e9569a90ae498b7f0b5e0f525427895f39a33 Mon Sep 17 00:00:00 2001
+From: Veeresh Kadasani <external.vkadasani@jp.adit-jv.com>
+Date: Wed, 20 Nov 2019 17:10:30 +0530
+Subject: [PATCH] compatible with weston 7.0.0
+
+---
+ ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt                  | 2 +-
+ ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c              | 4 ++--
+ ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt b/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
+index 7d22250..20c2d56 100644
+--- a/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
++++ b/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
+@@ -25,7 +25,7 @@ find_package(PkgConfig REQUIRED)
+ pkg_check_modules(WAYLAND_SERVER wayland-server REQUIRED)
+ pkg_check_modules(WESTON weston>=5.0.0 REQUIRED)
+ pkg_check_modules(PIXMAN pixman-1 REQUIRED)
+-pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-6 REQUIRED)
++pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-7 REQUIRED)
+
+ find_package(Threads REQUIRED)
+
+diff --git a/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c b/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
+index 9bc115d..880d567 100644
+--- a/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
++++ b/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
+@@ -26,8 +26,8 @@
+ #include <limits.h>
+
+ #include <weston.h>
+-#include <libweston-desktop.h>
+-#include "config-parser.h"
++#include <libweston-7/libweston-desktop/libweston-desktop.h>
++#include "libweston-7/libweston/config-parser.h"
+ #include <weston/ivi-layout-export.h>
+
+ #ifndef INVALID_ID
+diff --git a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+index a0bfc48..6af7d91 100644
+--- a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
++++ b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+@@ -31,7 +31,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+
+-#include "plugin-registry.h"
++#include "libweston-7/libweston/plugin-registry.h"
+ #include "ilm_types.h"
+
+ #include "ivi-input-server-protocol.h"
+--
+2.7.4
