@@ -23,6 +23,7 @@ do_configure_append() {
     # debug-prefix-map
     # See: http://lists.openembedded.org/pipermail/openembedded-devel/2016-May/107456.html
     sed -i -e "s# -fdebug-prefix-map=.*##g" librtlsdr.pc
+    sed -i -e "s# -fmacro-prefix-map=.*##g" librtlsdr.pc
 }
 
 do_install_append() {
