@@ -1,11 +1,11 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI =+ "${SOURCEFORGE_MIRROR}/freetype/ft2demos-${PV}.tar.bz2;name=ft2demos \
+SRC_URI =+ "${SOURCEFORGE_MIRROR}/freetype/ft2demos-${PV}.tar.gz;name=ft2demos \
            file://0001-Makefile-dont-build-gfx-demos.patch;patchdir=../ft2demos-${PV} \
            file://0001-ft2demos-Makefile-Do-not-hardcode-libtool-path.patch;patchdir=../ft2demos-${PV} \
           "
-SRC_URI[ft2demos.md5sum] = "178827156d90e07bce8f354c9565d84b"
-SRC_URI[ft2demos.sha256sum] = "806eb6363ee5963174a6740f9b7893377912165899c2c1f6372c422aab818c6a"
+SRC_URI[ft2demos.md5sum] = "c376adf4782bac9b9ac8e427884752d2"
+SRC_URI[ft2demos.sha256sum] = "5e9e94a2db9d1a945293a1644a502f6664a2173a454d4a55b19695e2e2f4a0bc"
 
 PACKAGES =+ "${PN}-demos"
 
