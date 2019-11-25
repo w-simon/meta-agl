@@ -5,5 +5,6 @@ SRC_URI_append = "\
     file://use-XDG_RUNTIMESHARE_DIR.patch \
     file://0002-ivi-shell-Fix-crash-due-no-transmitter-screen.patch \
     file://0003-compositor-drm-introduce-drm_get_dmafd_from_view.patch \
+    file://0001-compositor-wayland-Disable-frame-repaint.patch \
     "
 EXTRA_OECONF_append = " --enable-sys-uid"
