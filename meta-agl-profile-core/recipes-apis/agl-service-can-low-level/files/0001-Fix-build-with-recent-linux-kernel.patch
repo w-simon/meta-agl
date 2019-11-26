@@ -1,0 +1,30 @@
+From 1e425e88ea916ee7e010fa588771bb23fdc2aa2b Mon Sep 17 00:00:00 2001
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Tue, 26 Nov 2019 14:36:07 +0100
+Subject: [PATCH] Fix build with recent linux kernel
+
+Recent kernel commit[1] moved a bit the define for this constant.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=0768e17073dc5
+
+Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+Change-Id: I8d23857eeed07ef9d29e4557ff7d0ae2d67aad6f
+---
+ low-can-binding/utils/socketcan-bcm.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/low-can-binding/utils/socketcan-bcm.cpp b/low-can-binding/utils/socketcan-bcm.cpp
+index df41fba..c3cb58c 100644
+--- a/low-can-binding/utils/socketcan-bcm.cpp
++++ b/low-can-binding/utils/socketcan-bcm.cpp
+@@ -20,6 +20,7 @@
+ #include <net/if.h>
+ #include <sys/ioctl.h>
+ #include <fcntl.h>
++#include <linux/sockios.h>
+ 
+ #include "../binding/application.hpp"
+ 
+-- 
+2.24.0
+

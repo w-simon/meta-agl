@@ -9,6 +9,9 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-can-low-level;protocol=https;branch=${AGL_BRANCH}"
 SRCREV = "087a7c0e7de28bb1c16895ef9d414666d37a35ea"
 
+# This will be removed after merging https://gerrit.automotivelinux.org/gerrit/c/apps/agl-service-can-low-level/+/23054
+SRC_URI += "file://0001-Fix-build-with-recent-linux-kernel.patch"
+
 PV = "${AGLVERSION}"
 S  = "${WORKDIR}/git"
 
