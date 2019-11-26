@@ -1,0 +1,38 @@
+From 3222e8df61cf60b07c055c3804dc16283096dc41 Mon Sep 17 00:00:00 2001
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Tue, 26 Nov 2019 14:18:28 +0100
+Subject: [PATCH] Change read api in gpsd 3.19
+
+https://gerrit.automotivelinux.org/gerrit/c/apps/agl-service-gps/+/23052
+
+Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+Change-Id: I8e4520e4a92613000759500de79ba52b00ef4e73
+---
+ binding/afm-gps-binding.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/binding/afm-gps-binding.c b/binding/afm-gps-binding.c
+index 873c264..75f4176 100644
+--- a/binding/afm-gps-binding.c
++++ b/binding/afm-gps-binding.c
+@@ -278,7 +278,7 @@ static void *data_poll(void *ptr)
+ 			continue;
+ 		}
+ 		pthread_mutex_lock(&mutex);
+-		if (gps_read(&data) == -1) {
++		if (gps_read(&data, NULL, 0) == -1) {
+ 			AFB_ERROR("Cannot read from GPS daemon.\n");
+ 			pthread_mutex_unlock(&mutex);
+ 			break;
+@@ -336,7 +336,7 @@ static int gps_init()
+ 
+ 	// due to the gpsd.socket race condition need to loop till initial event
+ 	do {
+-		gps_read(&data);
++		gps_read(&data, NULL, 0);
+ 	} while (!gps_waiting(&data, MSECS_TO_USECS(2500)) && tries--);
+ 
+ 	return pthread_create(&thread, NULL, &data_poll, NULL);
+-- 
+2.24.0
+
