@@ -6,7 +6,7 @@ do_install_append() {
 
 	sed -i -e "s/FCLIST=\.\.\/fc\-list\/fc\-list/FCLIST=\/usr\/bin\/fc\-list/g" -e "s/FCCACHE=\.\.\/fc\-cache\/fc\-cache/FCCACHE=\/usr\/bin\/fc\-cache/g" ${D}/${datadir}/fontconfig-test/run-test.sh 
 
-	for x in 4x6.pcf 8x16.pcf out.expected fonts.conf.in; do
+	for x in 4x6.pcf 8x16.pcf out.expected-long-family-names out.expected-no-long-family-names fonts.conf.in; do
 		install -m 644 ${S}/test/$x ${D}/${datadir}/fontconfig-test/
 	done
 }
