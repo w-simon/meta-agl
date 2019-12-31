@@ -1,0 +1,14 @@
+diff --git a/libweston/compositor-wayland.c b/libweston/compositor-wayland.c
+index ef83882..d7f9dee 100644
+--- a/libweston/compositor-wayland.c
++++ b/libweston/compositor-wayland.c
+@@ -2547,7 +2547,7 @@ registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
+                b->parent.compositor =
+                        wl_registry_bind(registry, name,
+                                         &wl_compositor_interface,
+-                                        MIN(version, 4));
++                                        MIN(1, 4));
+        } else if (strcmp(interface, "xdg_wm_base") == 0) {
+                b->parent.xdg_wm_base =
+                        wl_registry_bind(registry, name,
+
