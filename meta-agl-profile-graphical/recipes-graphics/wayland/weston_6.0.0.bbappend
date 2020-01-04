@@ -5,6 +5,7 @@ SRC_URI_append = "\
     file://use-XDG_RUNTIMESHARE_DIR.patch \
     file://0003-compositor-drm-introduce-drm_get_dmafd_from_view.patch \
     file://0001-compositor-wayland-Disable-frame-repaint.patch \
+    file://9999-fix-screen-update-issue-of-wayland-backend.patch \
     "
 # Disabled until SPEC-2827 H3ULCB v3.0 + Kingfisher issue is debugged:
 #   file://0002-compositor-add-output-type-to-weston_output.patch
