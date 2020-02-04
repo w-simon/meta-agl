@@ -12,6 +12,9 @@ UBOOT_MACHINE = "rpi_3_32b_config"
 
 KERNEL_IMAGETYPE = "uImage"
 
+RPI_KERNEL_DEVICETREE_remove_raspberrypi3 = "bcm2708-rpi-0-w.dtb"
+RPI_KERNEL_DEVICETREE_OVERLAYS_remove_raspberrypi3 = "overlays/lirc-rpi.dtbo"
+RPI_KERNEL_DEVICETREE_OVERLAYS_append_raspberrypi3 = " overlays/vc4-fkms-v3d.dtbo"
 MACHINE_FEATURES += "vc4graphics"
 
 # For libomxil
