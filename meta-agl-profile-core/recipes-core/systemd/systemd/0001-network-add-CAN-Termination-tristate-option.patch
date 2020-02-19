@@ -1,0 +1,97 @@
+From 2885f0936d3069fba7bb0078897c98f50927875c Mon Sep 17 00:00:00 2001
+From: Matt Ranostay <matt.ranostay@konsulko.com>
+Date: Wed, 19 Feb 2020 12:14:53 -0800
+Subject: [PATCH] network: add CAN Termination tristate option
+
+Upstream-Status: Submitted
+Signed-off-by: Matt Ranostay <matt.ranostay@konsulko.com>
+---
+ src/libsystemd/sd-netlink/netlink-types.c |  1 +
+ src/network/networkd-link.c               | 13 +++++++++++++
+ src/network/networkd-network-gperf.gperf  |  1 +
+ src/network/networkd-network.c            |  1 +
+ src/network/networkd-network.h            |  1 +
+ 5 files changed, 17 insertions(+)
+
+diff --git a/src/libsystemd/sd-netlink/netlink-types.c b/src/libsystemd/sd-netlink/netlink-types.c
+index c93fe9cb4c..0ce950d5af 100644
+--- a/src/libsystemd/sd-netlink/netlink-types.c
++++ b/src/libsystemd/sd-netlink/netlink-types.c
+@@ -298,6 +298,7 @@ static const NLType rtnl_link_info_data_geneve_types[] = {
+ static const NLType rtnl_link_info_data_can_types[] = {
+         [IFLA_CAN_BITTIMING]            = { .size = sizeof(struct can_bittiming) },
+         [IFLA_CAN_RESTART_MS]           = { .type = NETLINK_TYPE_U32 },
++        [IFLA_CAN_TERMINATION]          = { .type = NETLINK_TYPE_U16 },
+ };
+ 
+ /* these strings must match the .kind entries in the kernel */
+diff --git a/src/network/networkd-link.c b/src/network/networkd-link.c
+index 4afcf843bd..af1c4ef55c 100644
+--- a/src/network/networkd-link.c
++++ b/src/network/networkd-link.c
+@@ -27,6 +27,8 @@
+ #include "util.h"
+ #include "virt.h"
+ 
++#define CAN_TERMINATION_OHM_VALUE 120
++
+ static bool link_dhcp6_enabled(Link *link) {
+         assert(link);
+ 
+@@ -1938,6 +1940,17 @@ static int link_set_can(Link *link) {
+                         return log_link_error_errno(link, r, "Could not append IFLA_CAN_RESTART_MS attribute: %m");
+         }
+ 
++        if (link->network->can_termination >= 0) {
++
++                log_link_debug(link, "%sabling can-termination", link->network->can_termination ? "En" : "Dis");
++
++                r = sd_netlink_message_append_u16(m, IFLA_CAN_TERMINATION,
++                                link->network->can_termination ? CAN_TERMINATION_OHM_VALUE : 0);
++                if (r < 0)
++                        return log_link_error_errno(link, r, "Could not append IFLA_CAN_TERMINATION attribute: %m");
++
++        }
++
+         r = sd_netlink_message_close_container(m);
+         if (r < 0)
+                 return log_link_error_errno(link, r, "Failed to close netlink container: %m");
+diff --git a/src/network/networkd-network-gperf.gperf b/src/network/networkd-network-gperf.gperf
+index 6ad5257f79..2f6b42809f 100644
+--- a/src/network/networkd-network-gperf.gperf
++++ b/src/network/networkd-network-gperf.gperf
+@@ -182,6 +182,7 @@ IPv6Prefix.PreferredLifetimeSec,        config_parse_prefix_lifetime,
+ CAN.BitRate,                            config_parse_si_size,                           0,                             offsetof(Network, can_bitrate)
+ CAN.SamplePoint,                        config_parse_permille,                          0,                             offsetof(Network, can_sample_point)
+ CAN.RestartSec,                         config_parse_sec,                               0,                             offsetof(Network, can_restart_us)
++CAN.Termination,                        config_parse_tristate,                          0,                             offsetof(Network, can_termination)
+ /* backwards compatibility: do not add new entries to this section */
+ Network.IPv4LL,                         config_parse_ipv4ll,                            0,                             offsetof(Network, link_local)
+ DHCPv4.UseDNS,                          config_parse_bool,                              0,                             offsetof(Network, dhcp_use_dns)
+diff --git a/src/network/networkd-network.c b/src/network/networkd-network.c
+index 429aac5e6c..ded66f5f43 100644
+--- a/src/network/networkd-network.c
++++ b/src/network/networkd-network.c
+@@ -248,6 +248,7 @@ static int network_load_one(Manager *manager, const char *filename) {
+         network->ipv6_accept_ra_use_dns = true;
+         network->ipv6_accept_ra_route_table = RT_TABLE_MAIN;
+         network->ipv6_mtu = 0;
++        network->can_termination = -1;
+ 
+         dropin_dirname = strjoina(network->name, ".network.d");
+ 
+diff --git a/src/network/networkd-network.h b/src/network/networkd-network.h
+index 2d46d393ac..1178510107 100644
+--- a/src/network/networkd-network.h
++++ b/src/network/networkd-network.h
+@@ -190,6 +190,7 @@ struct Network {
+         size_t can_bitrate;
+         unsigned can_sample_point;
+         usec_t can_restart_us;
++        int can_termination;
+ 
+         AddressFamilyBoolean ip_forward;
+         bool ip_masquerade;
+-- 
+2.25.0
+
