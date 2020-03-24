@@ -9,3 +9,7 @@ SRC_URI_append  = " file://namespace_fix.cfg \
 SRC_URI_append_ulcb = " \
     file://0004-ADSP-enable-and-add-sound-hardware-abstraction.patch \
 "
+
+SRC_URI_append = " \
+    file://fastboot.cfg \
+"
