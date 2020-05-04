@@ -101,3 +101,7 @@ KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/rtc.cfg"
 # netfilter options
 SRC_URI_append = " file://netfilter.cfg"
 KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/netfilter.cfg"
+
+# Enable support for SystemTap
+SRC_URI_append = " file://systemtap.cfg"
+KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/systemtap.cfg"
