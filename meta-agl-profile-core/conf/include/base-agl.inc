@@ -18,3 +18,4 @@ USERADDEXTENSION = "useradd-staticids"
 USERADD_ERROR_DYNAMIC = "error"
 USERADD_GID_TABLES = "files/group"
 USERADD_UID_TABLES = "files/passwd"
+

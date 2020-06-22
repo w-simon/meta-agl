@@ -14,7 +14,7 @@ ALLOW_EMPTY_${PN} = "1"
 RDEPENDS_${PN} += "\
     packagegroup-agl-image-boot \
     packagegroup-agl-core-security \
-    packagegroup-agl-graphical-weston \
+    runc-opencontainers \
 "
 
 RDEPENDS_profile-cluster = "${PN}"

@@ -11,4 +11,6 @@ RDEPENDS_${PN} += "\
     agl-service-data-persistence \
     agl-service-network \
     agl-service-platform-info \
+    distro-build-manifest \
+    run-agl-postinsts \
     "

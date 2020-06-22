@@ -15,8 +15,5 @@ RDEPENDS_${PN} += " \
                   weston-ini-conf \
                   weston-examples \
                   weston-ready \
-                  agl-login-manager \
-                  agl-desktop-config \
-                  ${@bb.utils.contains("DISTRO_FEATURES", "agl-compositor", "agl-compositor", "",d)} \
                   "
 

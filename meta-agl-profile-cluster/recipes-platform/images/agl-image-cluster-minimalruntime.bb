@@ -1,6 +1,6 @@
 SUMMARY = "A basic Wayland based cluster image"
 
-require agl-image-cluster.inc
+require agl-image-cluster-minimalruntime.inc
 
 LICENSE = "MIT"
 
