@@ -94,6 +94,8 @@ do_compilestep1[vardeps] += " ${BUILD_MANIFEST_FIELDS_SDK}"
 
 # avoid errors "ERROR: When reparsing .../distro-build-manifest/distro-build-manifest.bb.do_compile, the basehash value changed from .... to .... . The metadata is not deterministic and this needs to be fixed."
 do_compilestep2[vardepsexclude] = "DATETIME"
+do_compilestep2[vardepsexclude] += "DISTRO_SETUP_MANIFEST"
+do_compilestep2[vardepsexclude] += "DISTRO_MANIFEST_GENERATOR"
 
 # combine the two steps
 python do_compile() {
