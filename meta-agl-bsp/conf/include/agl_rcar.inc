@@ -40,6 +40,9 @@ DISTRO_FEATURES_append = " h264dec_lib h264enc_lib aaclcdec_lib aaclcdec_mdw"
 # testing shows no issues on H3ULCB when not having them.
 BBMASK += "meta-rcar-gen3/recipes-graphics/wayland/weston-init.bbappend"
 
+# mask out meta-renesas-rcar-gen3's tweaks to base-files / and fstab
+BBMASK += "meta-rcar-gen3/recipes-core/base-files/"
+
 IMAGE_INSTALL_append_rcar-gen3 = " \
     kernel-devicetree \
     kernel-module-pvrsrvkm \
