@@ -1,3 +1,5 @@
+require conf/include/agl_rcar_masks.inc
+
 DISTRO_FEATURES_append = " sota"
 
 OSTREE_KERNEL = "Image"
