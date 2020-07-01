@@ -7,3 +7,5 @@ OSTREE_BOOTLOADER ?= "u-boot"
 WKS_FILE = "singlepart-noloader.wks"
 
 RENESAS_DATADIR = "/usr"
+
+BBMASK += "bsp/meta-renesas/meta-rcar-gen3/recipes-kernel/linux-libc-headers/*"
