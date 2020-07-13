@@ -1,4 +1,4 @@
-MACHINE = "m3ulcb"
+MACHINE = "m3ulcb-kf"
 #see meta-agl/meta-agl-bsp/conf/include/agl_m3ulcb.inc
 require conf/include/agl_m3ulcb.inc
 
