@@ -1,0 +1,16 @@
+[Unit]
+Description=SocketCAN serial interface slcan0 with a baudrate of 500000
+Requires=networkd.service
+After=networkd.service
+  
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/modprobe slcan ; /usr/bin/slcan_attach -f -s6 -o /dev/ttyACM0 ; /usr/bin/slcand ttyACM0 slcan0 ; /sbin/ifconfig slcan0 up
+ExecReload=/sbin/ifconfig slcan0 down ; /sbin/ifconfig slcan0 up
+ExecStop=/sbin/ifconfig slcan0 down
+ 
+[Install]
+WantedBy=multi-user.target
+ 
+
