@@ -6,8 +6,8 @@ SECTION     = "apps"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-can-low-level;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "44615b186602f2e2c4dd8e2a8c1e00ccbdac1e9c"
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-can-low-level;protocol=https;branch=sandbox/walzert/can_build_icefish"
+SRCREV = "${AGL_APP_REVISION}"
 
 PV = "${AGLVERSION}"
 S  = "${WORKDIR}/git"
