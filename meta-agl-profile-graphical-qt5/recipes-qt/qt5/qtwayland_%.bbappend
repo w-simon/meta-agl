@@ -31,5 +31,12 @@ QT_SHELL_FILE = "${AFM_CONF_DIR}/qt-shell"
 do_install_append_class-target() {
 	mkdir -p ${AFM_CONF_DIR}
 	echo "QT_WAYLAND_SHELL_INTEGRATION=${AGL_DEFAULT_WM_SHELL}" > ${QT_SHELL_FILE}
-	echo "QT_WAYLAND_RESIZE_AFTER_SWAP=1" >> ${QT_SHELL_FILE}
+	echo -ne "# The following might be necessary to be enabled when multiple/split surfaces\n"\
+		"# are created. Without this enabled, QtWayland will sometimes maintain the same/old\n"\
+		"# size even if the split surface is destroyed. We keep it disabled by default as it\n"\
+		"# causes an additional repaint of the surface until the compositor sends a configure\n"\
+		"# event to scale the window to the actual area. Typical windows will default to a initial\n"\
+		"# size when starting-up without an explicit size specified. Note that QtWayland will only test\n"\
+	        "# the presence of the environment variable so it will be enabled even if set to 0\n" >> ${QT_SHELL_FILE}
+	echo "#QT_WAYLAND_RESIZE_AFTER_SWAP=1" >> ${QT_SHELL_FILE}
 }
