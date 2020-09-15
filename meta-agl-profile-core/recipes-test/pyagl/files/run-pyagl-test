@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export ${AGL_AVAILABLE_INTERFACES:=ethernet}
+pytest -k "not hwrequired" /usr/lib/python?.?/site-packages/pyagl/tests
