@@ -10,7 +10,7 @@ BBCLASSEXTEND = "nativesdk"
 DEPENDS = " cmake-apps-module"
 
 SRC_URI = "gitsm://gerrit.automotivelinux.org/gerrit/src/low-level-can-generator;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "d9c40fd96e31ce41166e2b846301335ed6fe5d37"
+SRCREV = "cc0c59a74271550604e1aaf55bdccd7de7e4b872"
 
 PV = "${AGLVERSION}"
 S  = "${WORKDIR}/git"
