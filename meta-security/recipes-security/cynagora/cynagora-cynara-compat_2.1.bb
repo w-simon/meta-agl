@@ -3,8 +3,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/cynagora;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "6c88efcb7b1361ba6389753e520e26fc556b7d79"
-PV = "2.0+git${SRCPV}"
+SRCREV = "c84823f3981b56171482b41d2b704c32cdd8062a"
+PV = "2.+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
