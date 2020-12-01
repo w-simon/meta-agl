@@ -9,6 +9,7 @@ SRC_URI_append = "\
     file://0002-ivi-shell-Fix-crash-due-no-transmitter-screen.patch \
     file://0001-libweston-Expose-weston_output_damage-in-libweston.patch \
     file://0004-main-change-remoting-initialization-timing.patch \
+    file://0005-correctly-tear-down-drm-backend.patch \
     file://smack-weston \
     "
 
