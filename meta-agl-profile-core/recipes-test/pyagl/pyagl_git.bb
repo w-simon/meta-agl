@@ -4,12 +4,16 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ae6497158920d9524cf208c09cc4c984"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/pyagl;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "6703d65bc91054d512fccb57a4275b30319a88d7"
+SRCREV = "9a7c3f431355d6f4a15ec67a6d7261b0cbfc85d5"
 PV = "${AGL_BRANCH}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
 inherit setuptools3
+
+do_install_append() {
+    install -D -m 0755 ${S}/pyagl/scripts/pyagl ${D}${bindir}/pyagl
+}
 
 RDEPENDS_${PN} += " \
     python3-asyncio \
