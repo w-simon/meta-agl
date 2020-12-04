@@ -1,7 +1,12 @@
 #!/bin/bash
 
 ZIP_1="R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston8-20191206.zip"
+ZIP_1_tmp="REN_R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston8-20191206__20200520.zip"
 ZIP_2="R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston8-20191021.zip"
+ZIP_2_tmp="REN_R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston8-20191021__20200520.zip"
+
+if [ -f "${XDG_DOWNLOAD_DIR}/${ZIP_1_tmp}" ]; then mv "${XDG_DOWNLOAD_DIR}/${ZIP_1_tmp}" "${XDG_DOWNLOAD_DIR}/${ZIP_1}"; fi
+if [ -f "${XDG_DOWNLOAD_DIR}/${ZIP_2_tmp}" ]; then mv "${XDG_DOWNLOAD_DIR}/${ZIP_2_tmp}" "${XDG_DOWNLOAD_DIR}/${ZIP_2}"; fi
 
 COPY_SCRIPT="$METADIR/bsp/meta-renesas/meta-rcar-gen3/docs/sample/copyscript/copy_evaproprietary_softwares.sh"
 
@@ -78,3 +83,4 @@ function copy_mm_packages() {
         return 1
     fi
 }
+
