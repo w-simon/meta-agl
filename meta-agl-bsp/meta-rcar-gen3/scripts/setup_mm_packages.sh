@@ -1,12 +1,19 @@
 #!/bin/bash
 
 ZIP_1="R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston5-20190802.zip"
+ZIP_1_tmp="REN_R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston5-20190802__20190808.zip"
 ZIP_2="R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston5-20191021.zip"
+ZIP_2_tmp="REN_R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston5-20191021__20191031.zip"
 
 COPY_SCRIPT="$METADIR/bsp/meta-renesas-rcar-gen3/meta-rcar-gen3/docs/sample/copyscript/copy_evaproprietary_softwares.sh"
 
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
 DOWNLOAD_DIR=${XDG_DOWNLOAD_DIR:-$HOME/Downloads}
+
+if [ -f "${DOWNLOAD_DIR}/${ZIP_1_tmp}" ]; then mv "${DOWNLOAD_DIR}/${ZIP_1_tmp}" "${DOWNLOAD_DIR}/${ZIP_1}"; fi
+if [ -f "${DOWNLOAD_DIR}/${ZIP_2_tmp}" ]; then mv "${DOWNLOAD_DIR}/${ZIP_2_tmp}" "${DOWNLOAD_DIR}/${ZIP_2}"; fi
+
+
 EXTRACT_DIR=$METADIR/binary-tmp
 
 stdout_in_terminal=1
