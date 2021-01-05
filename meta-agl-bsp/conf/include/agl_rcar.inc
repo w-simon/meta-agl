@@ -41,7 +41,6 @@ DISTRO_FEATURES_append = " h264dec_lib h264enc_lib aaclcdec_lib aaclcdec_mdw"
 BBMASK += "meta-rcar-gen3/recipes-graphics/wayland/weston-init.bbappend"
 
 IMAGE_INSTALL_append_rcar-gen3 = " \
-    kernel-devicetree \
     kernel-module-pvrsrvkm \
     kernel-module-vsp2 \
     kernel-module-vspm  \
