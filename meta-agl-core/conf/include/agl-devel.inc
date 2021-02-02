@@ -15,4 +15,4 @@ SDKIMAGE_FEATURES="dev-pkgs"
 
 # allows insertion of code or items specific to developement
 OVERRIDES .= ":agl-devel"
-DISTRO_FEATURES_append = " agl-devel"
+AGL_FEATURES_append = " agl-devel"
