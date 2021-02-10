@@ -4,6 +4,9 @@ GPU_MEM = "256"
 # Add CMA to the kernel arguments for SOTA
 OSTREE_KERNEL_ARGS_sota_append = " cma=256M"
 
+# Use 4.19 kernel for jellyfish
+PREFERRED_VERSION_linux-raspberrypi = "4.19.%"
+
 # use u-boot always
 RPI_USE_U_BOOT = "1"
 
