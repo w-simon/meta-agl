@@ -34,7 +34,7 @@ RDEPENDS_${PN}_append_libc-glibc = " glibc-utils"
 
 RDEPENDS_${PN}-ptest += "file make gmp nettle gnutls bash libgcc"
 
-RDEPENDS_${PN}-networking += "iptables"
+#RDEPENDS_${PN}-networking += "iptables"
 
 SRC_URI = "http://linuxcontainers.org/downloads/${BPN}-${PV}.tar.gz \
 	file://lxc-1.0.0-disable-udhcp-from-busybox-template.patch \
@@ -68,7 +68,7 @@ EXTRA_OECONF += "--enable-log-src-basename"
 
 CFLAGS_append = " -Wno-error=deprecated-declarations"
 
-PACKAGECONFIG ??= "templates \
+PACKAGECONFIG ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
 "
