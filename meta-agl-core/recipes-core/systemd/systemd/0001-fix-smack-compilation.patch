@@ -1,0 +1,70 @@
+Fix building with smack-run-label
+
+Builds with smack-run-label fail, move rename_apply_smack_floor_label
+to smack-utils.[ch] to match the shift of MAC functionality out of
+src/basic code.
+
+Upstream-Status: Pending
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+
+diff --git a/src/basic/fileio.c b/src/basic/fileio.c
+index 99a44fdea2..e79671e660 100644
+--- a/src/basic/fileio.c
++++ b/src/basic/fileio.c
+@@ -1406,16 +1406,3 @@ int warn_file_is_world_accessible(const char *filename, struct stat *st, const c
+                             filename, st->st_mode & 07777);
+         return 0;
+ }
+-
+-int rename_and_apply_smack_floor_label(const char *from, const char *to) {
+-        int r = 0;
+-        if (rename(from, to) < 0)
+-                return -errno;
+-
+-#if HAVE_SMACK_RUN_LABEL
+-        r = mac_smack_apply(to, SMACK_ATTR_ACCESS, SMACK_FLOOR_LABEL);
+-        if (r < 0)
+-                return r;
+-#endif
+-        return r;
+-}
+diff --git a/src/basic/fileio.h b/src/basic/fileio.h
+index c28b17fef5..236e27da8d 100644
+--- a/src/basic/fileio.h
++++ b/src/basic/fileio.h
+@@ -124,4 +124,3 @@ int safe_fgetc(FILE *f, char *ret);
+ 
+ int warn_file_is_world_accessible(const char *filename, struct stat *st, const char *unit, unsigned line);
+ 
+-int rename_and_apply_smack_floor_label(const char *temp_path, const char *dest_path);
+diff --git a/src/shared/smack-util.c b/src/shared/smack-util.c
+index 3362ee3924..9a7051e37f 100644
+--- a/src/shared/smack-util.c
++++ b/src/shared/smack-util.c
+@@ -286,3 +286,16 @@ int mac_smack_copy(const char *dest, const char *src) {
+         return 0;
+ }
+ #endif
++
++int rename_and_apply_smack_floor_label(const char *from, const char *to) {
++        int r = 0;
++        if (rename(from, to) < 0)
++                return -errno;
++
++#if HAVE_SMACK_RUN_LABEL
++        r = mac_smack_apply(to, SMACK_ATTR_ACCESS, SMACK_FLOOR_LABEL);
++        if (r < 0)
++                return r;
++#endif
++        return r;
++}
+diff --git a/src/shared/smack-util.h b/src/shared/smack-util.h
+index 36fdc72083..df91c89e01 100644
+--- a/src/shared/smack-util.h
++++ b/src/shared/smack-util.h
+@@ -44,3 +44,5 @@ int mac_smack_apply(const char *path, SmackAttr attr, const char *label);
+ int mac_smack_apply_fd(int fd, SmackAttr attr, const char *label);
+ int mac_smack_apply_pid(pid_t pid, const char *label);
+ int mac_smack_copy(const char *dest, const char *src);
++
++int rename_and_apply_smack_floor_label(const char *temp_path, const char *dest_path);

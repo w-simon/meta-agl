@@ -1,0 +1,35 @@
+systemd-udevd fails to apply SMACK labels
+
+The use of O_PATH in node_permissions_apply added by commit a7fdc6c does
+not work with the fsetxattr call in mac_smack_apply_fd, as that operation
+is not supported against O_PATH fd's.  Switching back to using
+mac_smack_apply seems the most straightforward fix, as there are other
+users of mac_smack_apply_fd that do not require a fd_reopen or similiar
+workaround.
+
+Upstream-Status: Pending
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+
+---
+diff --git a/src/udev/udev-node.c b/src/udev/udev-node.c
+index b8b93eeb7a..6706f1d346 100644
+--- a/src/udev/udev-node.c
++++ b/src/udev/udev-node.c
+@@ -408,7 +408,7 @@ static int node_permissions_apply(sd_device *dev, bool apply_mac,
+                         } else if (streq(name, "smack")) {
+                                 smack = true;
+ 
+-                                q = mac_smack_apply_fd(node_fd, SMACK_ATTR_ACCESS, label);
++                                q = mac_smack_apply(devnode, SMACK_ATTR_ACCESS, label);
+                                 if (q < 0)
+                                         log_device_full_errno(dev, q == -ENOENT ? LOG_DEBUG : LOG_ERR, q,
+                                                               "SECLABEL: failed to set SMACK label '%s': %m", label);
+@@ -423,7 +423,7 @@ static int node_permissions_apply(sd_device *dev, bool apply_mac,
+                 if (!selinux)
+                         (void) mac_selinux_fix_fd(node_fd, devnode, LABEL_IGNORE_ENOENT);
+                 if (!smack)
+-                        (void) mac_smack_apply_fd(node_fd, SMACK_ATTR_ACCESS, NULL);
++                        (void) mac_smack_apply(devnode, SMACK_ATTR_ACCESS, NULL);
+         }
+ 
+         /* always update timestamp when we re-use the node, like on media change events */
