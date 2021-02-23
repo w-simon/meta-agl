@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_append := ":${THISDIR}/weston"
 
 SRC_URI_append = "\
-    file://0005-correctly-tear-down-drm-backend.patch \
+    file://0001-libweston-Expose-weston_output_damage-in-libweston.patch \
     "
 
 # Workaround for incorrect upstream definition
