@@ -1,9 +1,5 @@
 FILESEXTRAPATHS:append := ":${THISDIR}/weston"
 
-SRC_URI:append = "\
-    file://0005-correctly-tear-down-drm-backend.patch \
-    "
-
 # Workaround for incorrect upstream definition
 PACKAGECONFIG[remoting] = "-Dremoting=true,-Dremoting=false,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[remoting] = "-Dremoting=true,-Dremoting=false,gstreamer1.0 gstreamer1.0-plugins-base"
