@@ -1,0 +1,20 @@
+Fix building with smack-run-label
+
+Builds with smack-run-label defined fail, add the missing #include.
+
+Upstream-Status: Pending
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+
+---
+diff --git a/src/basic/fileio.c b/src/basic/fileio.c
+index 973756c891..021627da7d 100644
+--- a/src/basic/fileio.c
++++ b/src/basic/fileio.c
+@@ -22,6 +22,7 @@
+ #include "mkdir.h"
+ #include "parse-util.h"
+ #include "path-util.h"
++#include "smack-util.h"
+ #include "socket-util.h"
+ #include "stdio-util.h"
+ #include "string-util.h"
