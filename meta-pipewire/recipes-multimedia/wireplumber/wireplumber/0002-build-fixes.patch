@@ -1,0 +1,66 @@
+Fix build with newer toolchains
+
+Fixes:
+- Remove unused structure declarations from trigger duplicate symbol
+  issues when linking with gcc 10.
+- Change section names to lowercase to avoid gobject-introspection
+  namespace collision.
+
+These changes are likely of no use to upstream, which has signficantly
+moved on from the current codebase.
+
+Upstream-Status: Inappropriate [other]
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+---
+diff --git a/lib/wp/base-endpoint.c b/lib/wp/base-endpoint.c
+index fbd7995..e262afd 100644
+--- a/lib/wp/base-endpoint.c
++++ b/lib/wp/base-endpoint.c
+@@ -7,7 +7,7 @@
+  */
+ 
+ /**
+- * SECTION: Endpoint
++ * SECTION: endpoint
+  *
+  * An endpoint is an abstraction layer that represents a physical place where
+  * audio can be routed to/from.
+diff --git a/lib/wp/exported.c b/lib/wp/exported.c
+index 56bf3df..e100a7a 100644
+--- a/lib/wp/exported.c
++++ b/lib/wp/exported.c
+@@ -7,7 +7,7 @@
+  */
+ 
+ /**
+- * SECTION: Exported
++ * SECTION: exported
+  *
+  * An exported object is an object that is implemented in the local
+  * wireplumber process but is exported to pipewire so that it is
+diff --git a/modules/module-pipewire/audio-softdsp-endpoint/adapter.h b/modules/module-pipewire/audio-softdsp-endpoint/adapter.h
+index f79fc22..975cb02 100644
+--- a/modules/module-pipewire/audio-softdsp-endpoint/adapter.h
++++ b/modules/module-pipewire/audio-softdsp-endpoint/adapter.h
+@@ -16,8 +16,6 @@
+ 
+ G_BEGIN_DECLS
+ 
+-struct spa_audio_info_raw format;
+-
+ #define WP_TYPE_AUDIO_ADAPTER (wp_audio_adapter_get_type ())
+ G_DECLARE_FINAL_TYPE (WpAudioAdapter, wp_audio_adapter, WP, AUDIO_ADAPTER,
+     WpAudioStream)
+diff --git a/modules/module-pipewire/audio-softdsp-endpoint/convert.h b/modules/module-pipewire/audio-softdsp-endpoint/convert.h
+index 1a4b1f3..899e4e5 100644
+--- a/modules/module-pipewire/audio-softdsp-endpoint/convert.h
++++ b/modules/module-pipewire/audio-softdsp-endpoint/convert.h
+@@ -16,8 +16,6 @@
+ 
+ G_BEGIN_DECLS
+ 
+-struct spa_audio_info_raw format;
+-
+ #define WP_TYPE_AUDIO_CONVERT (wp_audio_convert_get_type ())
+ G_DECLARE_FINAL_TYPE (WpAudioConvert, wp_audio_convert, WP, AUDIO_CONVERT,
+     WpAudioStream)
