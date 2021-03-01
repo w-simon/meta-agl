@@ -5,14 +5,13 @@ require af-main_${PV}.inc
 # NOTE: there is a hack of security for using groups and dbus (to be checked)
 # NOTE: using ZIP programs creates directories with mode 777 (very bad)
 
-inherit cmake pkgconfig useradd systemd
-BBCLASSEXTEND = "native"
-
 SECTION = "base"
 
 DEPENDS = "openssl libxml2 xmlsec1 systemd libzip json-c systemd security-manager af-binder sed m4"
-DEPENDS:class-native = "openssl libxml2 xmlsec1 libzip json-c"
+DEPENDS:class-native = "openssl-native libxml2-native xmlsec1-native libzip-native json-c-native"
 RDEPENDS:${PN}:class-target += "af-binder-tools nss-localuser cynagoauth"
+
+inherit cmake pkgconfig useradd systemd
 
 PACKAGE_WRITE_DEPS:append:with-lsm-smack = " smack-native libcap-native"
 
@@ -110,6 +109,7 @@ pkg_postinst_ontarget:${PN}:append:with-lsm-smack() {
     chsmack -a 'System::Shared' -t $D${afm_datadir}/applications
     chsmack -a 'System::Shared' -t $D${afm_datadir}/icons
 }
+
 FILES:${PN} += "${systemd_units_root}/* ${systemd_system_unitdir} ${systemd_user_unitdir}"
 FILES:${PN}:append:agl-sign-wgts = " ${datadir}/afm"
 
@@ -120,3 +120,5 @@ FILES:${PN}-binding-dbg = " ${afb_binding_dir}/.debug/afm-main-binding.so "
 PACKAGES =+ "${PN}-tools ${PN}-tools-dbg"
 FILES:${PN}-tools = "${bindir}/wgtpkg-*"
 FILES:${PN}-tools-dbg = "${bindir}/.debug/wgtpkg-*"
+
+BBCLASSEXTEND = "native"
