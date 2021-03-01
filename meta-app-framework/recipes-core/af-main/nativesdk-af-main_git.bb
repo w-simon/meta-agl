@@ -1,6 +1,6 @@
 require af-main_${PV}.inc 
 
-inherit nativesdk cmake pkgconfig 
+inherit cmake pkgconfig nativesdk
 
 SECTION = "base"
 
@@ -25,4 +25,3 @@ PACKAGES = "${PN}-tools ${PN}-tools-dbg"
 FILES_${PN}-tools = "${bindir}/wgtpkg-* ${afm_confdir}/*"
 FILES_${PN}-tools_append_agl-sign-wgts = " ${datadir}/afm"
 FILES_${PN}-tools-dbg = "${bindir}/.debug/wgtpkg-*"
-
