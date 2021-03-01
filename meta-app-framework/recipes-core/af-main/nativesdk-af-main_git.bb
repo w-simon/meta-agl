@@ -1,6 +1,6 @@
 require af-main_${PV}.inc 
 
-inherit nativesdk cmake pkgconfig 
+inherit cmake pkgconfig nativesdk
 
 SECTION = "base"
 
