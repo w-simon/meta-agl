@@ -14,7 +14,7 @@ inherit cmake_qt5
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/libqtappfw;protocol=https;branch=${AGL_BRANCH}"
 SRCREV  = "fe20f1b029f67dee1f790ade7a9114086f2abd38"
-S       = "${WORKDIR}/git/"
+S       = "${WORKDIR}/git"
 
 # PV needs to be modified with SRCPV to work AUTOREV correctly
 PV = "0.0+git${SRCPV}"
