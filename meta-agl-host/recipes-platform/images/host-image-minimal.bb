@@ -5,7 +5,9 @@ IMAGE_INSTALL = " \
         ${CORE_IMAGE_EXTRA_INSTALL} \
         packagegroup-agl-host-container-runtime \
         packagegroup-agl-host-sound \
-        pipewire-alsa alsa-utils \
+        container-host-config \
+        kernel-devicetree \
+        pipewire-alsa alsa-utils nano \
       "
 
 IMAGE_LINGUAS = " "
