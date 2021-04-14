@@ -7,7 +7,8 @@ IMAGE_INSTALL = " \
         packagegroup-agl-host-sound \
         container-host-config \
         kernel-devicetree \
-        pipewire-alsa alsa-utils nano \
+        drm-lease-manager \
+        nano \
       "
 
 IMAGE_LINGUAS = " "
