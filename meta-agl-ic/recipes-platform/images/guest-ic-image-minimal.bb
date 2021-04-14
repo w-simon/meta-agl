@@ -4,7 +4,8 @@ IMAGE_INSTALL = " \
         packagegroup-agl-cluster-boot \
         ${CORE_IMAGE_EXTRA_INSTALL} \
         packagegroup-agl-cluster-sound \
-        pipewire-alsa alsa-utils \
+        kmscube \
+        nano \
       "
 
 IMAGE_LINGUAS = " "
