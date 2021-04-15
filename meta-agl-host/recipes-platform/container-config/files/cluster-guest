@@ -10,9 +10,13 @@ lxc.mount.auto = cgroup:mixed proc:mixed sys:mixed
 lxc.mount.entry = shm /dev/shm tmpfs defaults 0 0
 lxc.mount.entry = /sys/kernel/security sys/kernel/security none ro,bind,optional 0 0
 
-#lxc.cgroup.devices.allow = c 226:* rwm
-#lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
+lxc.cgroup.devices.allow = c 226:* rwm
+lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
 
 #lxc.mount.entry = /lxc/share lxc/share none bind,optional,create=dir
+lxc.mount.entry = /run/drm-lease-manager/card0-HDMI-A-1 var/display/drm-lease-manager/card0-HDMI-A-1 none bind,create=file
+
+lxc.cgroup.devices.allow = c 10:* rwm
+lxc.mount.entry = /dev/pvr_sync dev/pvr_sync none bind,optional,create=file
 
 lxc.net.0.type = empty
