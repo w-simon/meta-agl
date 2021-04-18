@@ -15,6 +15,7 @@ lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
 
 #lxc.mount.entry = /lxc/share lxc/share none bind,optional,create=dir
 lxc.mount.entry = /run/drm-lease-manager/card0-HDMI-A-1 var/display/drm-lease-manager/card0-HDMI-A-1 none bind,create=file
+lxc.environment = DLM_RUNTIME_PATH=/var/display/drm-lease-manager
 
 lxc.cgroup.devices.allow = c 10:* rwm
 lxc.mount.entry = /dev/pvr_sync dev/pvr_sync none bind,optional,create=file
