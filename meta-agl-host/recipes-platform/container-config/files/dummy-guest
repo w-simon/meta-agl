@@ -6,6 +6,8 @@ lxc.tty.max = 1
 lxc.pty.max = 1
 lxc.cap.drop = sys_module mac_admin mac_override sys_time
 
+lxc.mount.entry = /var/lib/lxc/dummy-guest/environment etc/environment none bind,optional,create=file
+
 lxc.mount.auto = cgroup:mixed proc:mixed sys:mixed
 lxc.mount.entry = shm /dev/shm tmpfs defaults 0 0
 lxc.mount.entry = /sys/kernel/security sys/kernel/security none ro,bind,optional 0 0
