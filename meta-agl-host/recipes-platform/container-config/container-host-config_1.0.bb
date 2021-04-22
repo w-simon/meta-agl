@@ -9,8 +9,8 @@ S = "${WORKDIR}"
 SRC_URI = " \
     file://cluster-guest \
     file://dummy-guest \
-    file://cluster-guest-environment \
-    file://dummy-guest-environment \
+    file://system.conf.cluster-guest \
+    file://system.conf.dummy-guest \
 "
 
 inherit systemd
@@ -23,11 +23,11 @@ do_install () {
     # install lxc configs
     install -m 0755 -d ${D}/var/lib/lxc/cluster-guest
     install -m 0644 ${WORKDIR}/cluster-guest ${D}/var/lib/lxc/cluster-guest/config
-    install -m 0644 ${WORKDIR}/cluster-guest-environment ${D}/var/lib/lxc/cluster-guest/environment
+    install -m 0644 ${WORKDIR}/system.conf.cluster-guest ${D}/var/lib/lxc/cluster-guest/system.conf
 
     install -m 0755 -d ${D}/var/lib/lxc/dummy-guest
     install -m 0644 ${WORKDIR}/dummy-guest ${D}/var/lib/lxc/dummy-guest/config
-    install -m 0644 ${WORKDIR}/dummy-guest-environment ${D}/var/lib/lxc/dummy-guest/environment
+    install -m 0644 ${WORKDIR}/system.conf.dummy-guest ${D}/var/lib/lxc/dummy-guest/system.conf
 }
 
 PACKAGES = "\
