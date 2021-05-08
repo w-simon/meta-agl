@@ -1,3 +1,7 @@
+# AGL includes all kernel modules here for ease-of-use during development.
+# Comment this out to be able to select the kernel modules yourself.
+IMAGE_INSTALL_append = " kernel-modules"
+
 IMAGE_FEATURES =+ "debug-tweaks tools-debug tools-profile"
 
 IMAGE_INSTALL_append = " \
