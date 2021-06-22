@@ -1,12 +1,12 @@
 #!/bin/bash
 
-ZIP_1="R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston8-20210121.zip"
-ZIP_2="R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston8-20210121.zip"
+ZIP_1="R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston8-20210428.zip"
+ZIP_2="R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston8-20210428.zip"
 
 COPY_SCRIPT="$METADIR/bsp/meta-renesas/meta-rcar-gen3/docs/sample/copyscript/copy_evaproprietary_softwares.sh"
 
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
-DOWNLOAD_DIR=${XDG_DOWNLOAD_DIR:-$HOME/Downloads}
+DOWNLOAD_DIR=${XDG_DOWNLOAD_CUSTOM_DIR:-$HOME/Downloads}
 EXTRACT_DIR=$METADIR/binary-tmp
 
 stdout_in_terminal=1
