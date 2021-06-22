@@ -12,10 +12,10 @@ abstraction.
 Signed-off-by: Ronan Le Martret <ronan.lemartret@iot.bzh>
 Signed-off-by: Mark Farrugia <mark.farrugia@fiberdyne.com.au>
 ---
-diff --git a/arch/arm64/boot/dts/renesas/r8a7796-m3ulcb.dts b/arch/arm64/boot/dts/renesas/r8a7796-m3ulcb.dts
+diff --git a/arch/arm64/boot/dts/renesas/r8a77960-ulcb.dts b/arch/arm64/boot/dts/renesas/r8a77960-ulcb.dts
 index 1cd64c1b3b31..71e59da3528d 100644
---- a/arch/arm64/boot/dts/renesas/r8a7796-m3ulcb.dts
-+++ b/arch/arm64/boot/dts/renesas/r8a7796-m3ulcb.dts
+--- a/arch/arm64/boot/dts/renesas/r8a77960-ulcb.dts
++++ b/arch/arm64/boot/dts/renesas/r8a77960-ulcb.dts
 @@ -42,11 +42,18 @@
  			reg = <0x00000000 0x54000000 0x0 0x03000000>;
  		};
