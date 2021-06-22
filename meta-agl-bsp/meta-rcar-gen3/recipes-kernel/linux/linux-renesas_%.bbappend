@@ -13,9 +13,9 @@ AGL_KCONFIG_FRAGMENTS += "namespace_fix.cfg"
 AGL_KCONFIG_FRAGMENTS += " \
     ${@bb.utils.contains('AGL_XEN_WANTED','1','xen-be.cfg','',d)} \
 "
-SRC_URI_append_m3ulcb = " \
-    ${@bb.utils.contains('AGL_XEN_WANTED','1','file://r8a7796-m3ulcb-xen.dts;subdir=git/arch/${ARCH}/boot/dts/renesas','',d)} \
+SRC_URI_append:m3ulcb = " \
+    ${@bb.utils.contains('AGL_XEN_WANTED','1','file://r8a77960-ulcb-xen.dts;subdir=git/arch/${ARCH}/boot/dts/renesas','',d)} \
 "
 KERNEL_DEVICETREE_append_m3ulcb = " \
-    ${@bb.utils.contains('AGL_XEN_WANTED','1','renesas/r8a7796-m3ulcb-xen.dtb','',d)} \
+    ${@bb.utils.contains('AGL_XEN_WANTED','1','renesas/r8a77960-ulcb-xen.dtb','',d)} \
 "
