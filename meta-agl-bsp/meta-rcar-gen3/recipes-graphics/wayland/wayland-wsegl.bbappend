@@ -1,1 +1,1 @@
-DEPENDS_append = " wayland-protocols"
+DEPENDS:append = " wayland-protocols"
