@@ -12,7 +12,7 @@ DEPENDS = "wayland wayland-protocols wayland-native weston \
 	   ${@bb.utils.contains('AGL_FEATURES', 'waltham-remoting', 'waltham waltham-transmitter-plugin', '', d)}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/agl-compositor.git;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "68d184f9d541a475e15727d71f49b6df6799a054"
+SRCREV = "bd4c81d5f90d466df8019d19dca4856aa7a5fa80"
 
 PV = "0.0.10+git${SRCPV}"
 S = "${WORKDIR}/git"
@@ -28,5 +28,12 @@ FILES_${PN} = " \
                ${bindir}/agl-screenshooter \
                ${datadir}/${PN}/protocols/agl-shell.xml \
                ${datadir}/${PN}/protocols/agl-shell-desktop.xml \
+               ${libdir}/agl-compositor/libexec_compositor.so.0 \
+               ${libdir}/agl-compositor/libexec_compositor.so.0.0.0 \
               "
+
 RDEPENDS_${PN} += " ${@bb.utils.contains('AGL_FEATURES', 'waltham-remoting', 'waltham waltham-transmitter-plugin', '', d)}"
+
+FILES_${PN}-dev += " \
+        ${libdir}/agl-compositor/libexec_compositor.so \
+"
