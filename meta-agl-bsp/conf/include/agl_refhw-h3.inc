@@ -7,3 +7,10 @@ KERNEL_DEVICETREE_append = " renesas/r8a7795-agl-refhw.dtb"
 
 UBOOT_CONFIG_append = " agl-refhw-4x2g"
 UBOOT_CONFIG[agl-refhw-4x2g] = "r8a7795_salvator-xs-4x2g_defconfig"
+
+MACHINE_EXTRA_RRECOMMENDS_append_h3ulcb = " \
+    linux-firmware-wl18xx \
+    ti-bt-firmware \
+    wlconf \
+    wireless-regdb-static \
+"
