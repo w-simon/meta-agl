@@ -2,6 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/pipewire:"
 
 SRC_URI:append= "\
     file://0001-modules-add-new-access-seclabel-module.patch \
+    file://0002-meson-remove-pipewire_module_c_args-as-it-is-no-long.patch \
     file://pipewire.conf \
     file://pipewire.service \
     file://pipewire.socket \
