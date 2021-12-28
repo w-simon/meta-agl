@@ -2,6 +2,8 @@ FILESEXTRAPATHS:append := ":${THISDIR}/weston"
 
 SRC_URI:append = "\
     file://0005-correctly-tear-down-drm-backend.patch \
+    file://0001-libweston-backend-drm-Re-order-gbm-destruction-at-DR.patch \
+    file://0001-gl-renderer-Avoid-double-free-on-init-failure.patch \
     "
 
 # Workaround for incorrect upstream definition
