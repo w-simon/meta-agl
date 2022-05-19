@@ -1,0 +1,1 @@
+addtask merge_delta_config before do_kernel_localversion
