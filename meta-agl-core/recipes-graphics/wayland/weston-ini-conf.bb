@@ -9,7 +9,7 @@ SRC_URI = " \
 	file://hdmi-a-1-90.cfg \
 	file://hdmi-a-1-180.cfg \
 	file://hdmi-a-1-270.cfg \
-	file://remote-output.cfg \
+	file://remote-output.cfg.in \
 	file://transmitter-output.cfg.in \
 	file://virtual-0.cfg \
 	file://virtual-180.cfg \
@@ -32,16 +32,25 @@ WESTON_FRAGMENTS = "core shell ${WESTON_DISPLAYS}"
 weston_ini_dir = "${sysconfdir}/xdg/weston"
 
 # Options for the user to change in local.conf
-# e.g. TRANSMITTER_OUTPUT_MODE = "1080x1488"
-TRANSMITTER_OUTPUT_MODE ??= "640x720@30"
-TRANSMITTER_OUTPUT_HOST ??= "192.168.20.99"
-TRANSMITTER_OUTPUT_PORT ??= "5005"
+# e.g. REMOTE_OUTPUT_MODE = "1080x1488"
+REMOTE_OUTPUT_MODE ??= "640x720@30"
+REMOTE_OUTPUT_HOST ??= "192.168.20.99"
+REMOTE_OUTPUT_PORT ??= "5005"
+REMOTE_OUTPUT_APP_ID ??= ""
 
 do_configure() {
-    sed -e "s#mode=.*#mode=${TRANSMITTER_OUTPUT_MODE}#" \
-        -e "s#host=.*#host=${TRANSMITTER_OUTPUT_HOST}#" \
-        -e "s#port=.*#port=${TRANSMITTER_OUTPUT_PORT}#" \
+    sed -e "s#mode=.*#mode=${REMOTE_OUTPUT_MODE}#" \
+        -e "s#host=.*#host=${REMOTE_OUTPUT_HOST}#" \
+        -e "s#port=.*#port=${REMOTE_OUTPUT_PORT}#" \
         ${WORKDIR}/transmitter-output.cfg.in  > ${WORKDIR}/transmitter-output.cfg
+
+    sed -e "s#mode=.*#mode=${REMOTE_OUTPUT_MODE}#" \
+        -e "s#host=.*#host=${REMOTE_OUTPUT_HOST}#" \
+        -e "s#port=.*#port=${REMOTE_OUTPUT_PORT}#" \
+        ${WORKDIR}/remote-output.cfg.in  > ${WORKDIR}/remote-output.cfg
+    if [ -n "${REMOTE_OUTPUT_APP_ID}" ]; then
+        echo "agl-shell-app-id=${REMOTE_OUTPUT_APP_ID}" >> ${WORKDIR}/remote-output.cfg
+    fi
 }
 
 do_compile() {
