@@ -8,11 +8,11 @@ SECTION = "x11"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fac6abe0003c4d142ff8fa1f18316df0"
 
-DEPENDS = "wayland wayland-protocols wayland-native weston \
+DEPENDS = "wayland wayland-protocols pixman wayland-native weston protobuf-native grpc-native protobuf grpc \
 	   ${@bb.utils.contains('AGL_FEATURES', 'waltham-remoting', 'waltham waltham-transmitter-plugin', '', d)}"
 
-SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/agl-compositor.git;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "924473ef016ba8dcfa863861740be2289421313d"
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/agl-compositor.git;protocol=https;branch=sandbox/mvlad/grpc-async-cb"
+SRCREV = "59375972f5642b7ec5115fdecf4828f6af02f343"
 AGL_BRANCH:aglnext = "next"
 SRCREV:aglnext = "${AUTOREV}"
 
@@ -30,6 +30,7 @@ FILES:${PN} = " \
     ${bindir}/agl-screenshooter \
     ${libdir}/agl-compositor/libexec_compositor.so.0 \
     ${libdir}/agl-compositor/libexec_compositor.so.0.0.0 \
+    ${libdir}/agl-compositor/agl-shell-grpc-server \
 "
 
 RDEPENDS:${PN} += " \

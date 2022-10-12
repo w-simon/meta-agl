@@ -8,7 +8,7 @@ SECTION = "x11"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e978448a0d41d826d73890d9c22caf75"
 
-DEPENDS = "wayland wayland-protocols wayland-native agl-compositor"
+DEPENDS = "wayland wayland-protocols wayland-native agl-compositor protobuf-native grpc-native protobuf grpc"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/agl-shell-activator.git;protocol=https;branch=${AGL_BRANCH}"
 SRCREV = "0b21156c3b4f049325dbc7937aabb1f689ed945d"
