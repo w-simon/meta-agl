@@ -11,6 +11,8 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 
 do_install() {
     install -m 700 -d ${D}${sysconfdir}/polkit-1/rules.d
-    chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
-    install -m 0644 ${WORKDIR}/50-agl-app.rules ${D}${sysconfdir}/polkit-1/rules.d
+    chown -R polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+    install -m 0644 ${WORKDIR}/50-agl-app.rules ${D}${sysconfdir}/polkit-1/rules.d/
 }
+
+RDEPENDS:${PN} += "polkit"
