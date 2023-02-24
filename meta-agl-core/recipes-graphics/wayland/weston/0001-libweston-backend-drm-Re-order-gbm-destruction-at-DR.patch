@@ -1,6 +1,5 @@
-From d171c7b3ba346c4d0bd6494f45ebf0be3c3cc5fb Mon Sep 17 00:00:00 2001
+From bd108ca84767a339c274ad0b56d74b46b3888c38 Mon Sep 17 00:00:00 2001
 From: Marius Vlad <marius.vlad@collabora.com>
-Upstream-Status: Backport
 Date: Thu, 1 Apr 2021 00:12:00 +0300
 Subject: [PATCH] libweston/backend-drm: Re-order gbm destruction at
  DRM-backend tear down
@@ -14,17 +13,19 @@ compositor shutdown when no one would make use of it.
 
 Fixes: #314
 
+Upstream-Status: Backport
 Signed-off-by: Marius Vlad <marius.vlad@collabora.com>
 Suggested-by: Daniel Stone <daniel.stone@collabora.com>
+
 ---
  libweston/backend-drm/drm.c | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/libweston/backend-drm/drm.c b/libweston/backend-drm/drm.c
-index c780c1c16..abfcabd3b 100644
+index be2570b..3cb41bf 100644
 --- a/libweston/backend-drm/drm.c
 +++ b/libweston/backend-drm/drm.c
-@@ -3203,10 +3203,6 @@ err_drm_source:
+@@ -2992,10 +2992,6 @@ err_drm_source:
  err_udev_input:
  	udev_input_destroy(&b->input);
  err_sprite:
@@ -33,9 +34,9 @@ index c780c1c16..abfcabd3b 100644
 -		gbm_device_destroy(b->gbm);
 -#endif
  	destroy_sprites(b);
- err_create_crtc_list:
- 	drmModeFreeResources(res);
-@@ -3218,6 +3214,10 @@ err_launcher:
+ err_udev_dev:
+ 	udev_device_unref(drm_device);
+@@ -3005,6 +3001,10 @@ err_launcher:
  	weston_launcher_destroy(compositor->launcher);
  err_compositor:
  	weston_compositor_shutdown(compositor);
@@ -46,6 +47,3 @@ index c780c1c16..abfcabd3b 100644
  	free(b);
  	return NULL;
  }
--- 
-2.33.0
-
