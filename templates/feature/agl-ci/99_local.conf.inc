@@ -6,14 +6,10 @@ PARALLEL_MAKE:pn-opencv = "-j 1"
 AGL_HOST_PREMIRROR ?= "http://download.automotivelinux.org"
 AGL_HOST_SSTATE_MIRROR ?= "http://download.automotivelinux.org"
 
-PREMIRRORS = " \
-git://.*/.*   ${AGL_HOST_PREMIRROR}/AGL/mirror/  \n \
-ftp://.*/.*   ${AGL_HOST_PREMIRROR}/AGL/mirror/  \n \
-http://.*/.*  ${AGL_HOST_PREMIRROR}/AGL/mirror/  \n \
-https://.*/.* ${AGL_HOST_PREMIRROR}/AGL/mirror/  \n \
-"
+SOURCE_MIRROR_URL := "${AGL_HOST_PREMIRROR}/AGL/mirror/"
+INHERIT += "own-mirrors"
 
-SSTATE_MIRRORS = "  file://.* ${AGL_HOST_SSTATE_MIRROR}/sstate-mirror/master/${DEFAULTTUNE}/PATH;downloadfilename=PATH \n                  "
+SSTATE_MIRRORS = "  file://.* ${AGL_HOST_SSTATE_MIRROR}/sstate-mirror/${AGL_BRANCH}/${DEFAULTTUNE}/PATH;downloadfilename=PATH \n                  "
 
 #INHERIT += "packagefeed-stability"
 INHERIT += "buildhistory"
