@@ -19,6 +19,7 @@ RDEPENDS:${PN} = "\
         libxslt-bin \
         gcc-sanitizers \
         pciutils \
+        zstd \
         "
 
 # needs meta-oe present
